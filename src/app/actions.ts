@@ -33,6 +33,17 @@ export async function handleNameSubmit(
     };
   }
 
+  // password should be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character
+  if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)) {
+    return {
+      status: 400,
+      body: {
+        error:
+          "Password should be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+      },
+    };
+  }
+
   const checkAvailability = await db.user.findFirst({
     where: {
       username: name,

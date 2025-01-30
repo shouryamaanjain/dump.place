@@ -6,6 +6,9 @@ import {
 } from "next-auth";
 // import EmailProvider from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
+import TwitterProvider from "next-auth/providers/twitter";
+import FacebookProvider from "next-auth/providers/facebook";
 
 import { env } from "@/env";
 import { db } from "@/server/db";
@@ -81,6 +84,18 @@ export const authOptions: NextAuthOptions = {
           response_type: "code"
         }
       }
+    }),
+    GitHubProvider({
+      clientId: env.GITHUB_CLIENT_ID,
+      clientSecret: env.GITHUB_CLIENT_SECRET,
+    }),
+    TwitterProvider({
+      clientId: env.TWITTER_CLIENT_ID,
+      clientSecret: env.TWITTER_CLIENT_SECRET,
+    }),
+    FacebookProvider({
+      clientId: env.FACEBOOK_CLIENT_ID,
+      clientSecret: env.FACEBOOK_CLIENT_SECRET,
     }),
   ],
 };
